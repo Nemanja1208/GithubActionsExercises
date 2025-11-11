@@ -1,0 +1,25 @@
+name: 🧠 Exercise 4 - Auto Environment Deploy
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  deploy-dev:
+    name: 🧩 Deploy to Dev (non-main)
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: 🚀 Deploying to Dev
+        run: echo "deploy to ${{ github.environment }}"
+
+  deploy-prod:
+    name: 🚀 Deploy to Prod (main)
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: ⚡ Deploying to Prod
+        run: echo "deploy to ${{ github.environment }}"
